@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Behind the Screen</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fafafa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 20px 0;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        .intro {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            text-align: left;
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #555;
+            border-top: 4px solid #3498db;
+        }
+        .visualization-block {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            padding: 25px;
+            gap: 30px;
+        }
+        .image-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .image-col img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer; /* 提示用户图片可点击 */
+        }
+        .image-col img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .analysis-box {
+            width: 100%;
+            max-width: 350px;
+            padding: 15px;
+            background-color: #fdfdfd;
+            border: 1px dashed #bdc3c7;
+            border-radius: 6px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            line-height: 1.5;
+            font-style: italic;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .text-col {
+            flex: 1;
+        }
+        .text-col h2 {
+            color: #2980b9;
+            font-size: 1.3em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .text-col p {
+            font-size: 0.95em;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 12px;
+        }
+        .text-col ul {
+            font-size: 0.95em;
+            line-height: 1.7;
+            color: #444;
+            padding-left: 20px;
+        }
+        .text-col li {
+            margin-bottom: 8px;
+        }
+        
+        /* 底部红色小字样式 */
+        .footer-note {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 0.82em;
+            margin-top: 25px;
+            margin-bottom: 35px;
+            line-height: 1.4;
+        }
+
+        /* 模态框（Lightbox）样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 40px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            cursor: zoom-out;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 85%;
+            max-height: 85vh;
+            border-radius: 6px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.5);
+            animation: zoomIn 0.25s ease-out;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #ffffff;
+            font-size: 35px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-btn:hover {
+            color: #bdc3c7;
+        }
+        
+        /* Make it responsive */
+        @media (max-width: 768px) {
+            .visualization-block {
+                flex-direction: column;
+            }
+            .image-col img, .analysis-box {
+                max-width: 100%;
+            }
+            .modal-content {
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Data Behind the Screen: Visualizing My Viewing Habits and Preferences During My Master's Degree</h1>
+    
+    <div class="intro">
+        <p><strong>Project Introduction</strong></p>
+        <p>
+            Welcome to my viewing data visualization portfolio. During my demanding master's studies, movies and TV series became an essential way for me to unwind and find creative inspiration. This project collects and organizes my viewing history during this academic journey, covering genres, durations, platforms, and personal ratings. Through these customized data visualization charts, I invite you to intuitively explore the viewing habits and personal preferences hidden behind my screen.
+        </p>
+    </div>
+
+    <!-- Group 1: Sankey Diagram -->
+    <div class="visualization-block">
+        <div class="image-col">
+            <img src="image1.png" alt="Sankey Diagram" onclick="openLightbox(this.src)">
+            <div class="analysis-box">
+                The visual trajectories clearly dismantle my initial hypothesis, revealing starkly contrasting behavioral patterns between Paid (red) and Free (grey) platforms.
+
+It can be seen that most of the time I do pay, and I watch a large number of American and Korean works on the paid platform. The majority of the themes I frequently watch and pay for are also those with strong entertainment value. European and Taiwanese works are the minority that I watch more without paying.
+            </div>
+        </div>
+        <div class="text-col">
+            <h2>The Economic Funnel (Sankey Diagram)</h2>
+            <p><strong>Data Calculation & Processing Methodology:</strong></p>
+            <ul>
+                <li><strong>Dimensional Aggregation:</strong> Extracted key categorical dimensions such as <code>Platform</code>, <code>Type</code>, and <code>Genre</code> from the raw <code>watching_data.csv</code> dataset.</li>
+                <li><strong>Flow Calculation:</strong> Aggregated the rows using a multi-level grouping mechanism (<code>groupby</code>) to compute the exact counts of records flowing between adjacent nodes (e.g., tracking the precise number of entries shifting from "NETFLIX" to "Movie" vs. "TV Series").</li>
+                <li><strong>Weight Mapping:</strong> The width of the connecting links directly scales with the frequency of views (or total <code>Duration_Minutes</code>), providing an immediate, high-level visual breakdown of which platforms and contents dominated my screen time.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Group 2: Four-Quadrant Bubble Chart -->
+    <div class="visualization-block">
+        <div class="image-col">
+            <img src="image2.png" alt="Four Quadrant Bubble Chart" onclick="openLightbox(this.src)">
+            <div class="analysis-box">
+                A quick glance at the bottom-left quadrant—the **"Guilty Pleasures"** zone—utterly shatters my self-proclaimed "high-taste" persona.The distribution of unpaid and paid content in the other sections was relatively balanced, and the rewatch rate was mainly concentrated on high-scoring classic movies.
+
+If I only watched bad movies casually on free platforms, this quadrant should be filled with small, grey bubbles. However, the data brutally reveals a different reality: The quadrant is severely populated with **giant, red bubbles**. 
+This visual evidence proves the "Taste Paradox": Not only do I actively consume poorly-rated popcorn entertainment, but I actually **pay for them (Red)** and **obsessively rewatch them (Large Size)**.
+            </div>
+        </div>
+        <div class="text-col">
+            <h2>The Taste Paradox (Four-Quadrant Bubble Chart)</h2>
+            <p><strong>Data Calculation & Processing Methodology:</strong></p>
+            <ul>
+                <li><strong>Axis Configuration:</strong> Positioned <code>Public_Rating</code> on the X-axis and personal <code>My_Rating</code> on the Y-axis to formally contrast external consensus with individual taste.</li>
+                <li><strong>Quadrant Division:</strong> Established a crosshair baseline utilizing the mean or median values of both score distributions, mathematically segmenting the chart into four distinct quadrants (e.g., "Guilty Pleasures", "Critically Acclaimed Masterpieces", "Overrated Hits", and "Shared Dislikes").</li>
+                <li><strong>Bubble Scaling:</strong> Each bubble represents a single title. The size of the bubble is dynamically mapped to <code>Duration_Minutes</code> or <code>Watch_Index</code>, making longer series or higher-weight views visually prominent.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Group 3: Combined Analysis -->
+    <div class="visualization-block">
+        <div class="image-col">
+            <img src="image3.png" alt="Visualization Chart 1" onclick="openLightbox(this.src)">
+            <img src="image4.png" alt="Visualization Chart 2" onclick="openLightbox(this.src)">
+            <div class="analysis-box">
+                A quick glance at the bottom-left quadrant—the **"Guilty Pleasures"** zone—utterly shatters my self-proclaimed "high-taste" persona.The distribution of unpaid and paid content in the other sections was relatively balanced, and the rewatch rate was mainly concentrated on high-scoring classic movies.
+
+If I only watched bad movies casually on free platforms, this quadrant should be filled with small, grey bubbles. However, the data brutally reveals a different reality: The quadrant is severely populated with **giant, red bubbles**. 
+This visual evidence proves the "Taste Paradox": Not only do I actively consume poorly-rated popcorn entertainment, but I actually **pay for them (Red)** and **obsessively rewatch them (Large Size)**.
+            </div>
+        </div>
+        <div class="text-col">
+            <h2>Seasonal Preferences and Expansion of Comfort Zone (Dual-axis Chart)</h2>
+            <p><strong>Data Calculation & Processing Methodology:</strong></p>
+            <ul>
+                <li><strong>Time-Series Aggregation:</strong> Chronologically sorted and grouped the data by <code>Watch_Year_Quarter</code> to summarize the count and total duration per quarter. This highlights how my viewing frequency adjusted rhythmically with academic workloads across semesters.</li>
+                <li><strong>Categorical Distribution:</strong> Analyzed the composition of categorical attributes like <code>Country_Release</code> or <code>Genre</code> through frequency counts and normalized percentage distributions to find demographic preferences.</li>
+                <li><strong>Data Exploding (Data Cleaning):</strong> To accurately handle multi-labeled entries (e.g., <code>Drama|Thriller</code>), rows were split using <code>.str.split('|')</code> and expanded via <code>.explode()</code>. This crucial data-clearing step ensures that each sub-genre is accurately accounted for without underrepresenting composite genres.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 底部红色小字提示 -->
+    <div class="footer-note">
+        * Please refer to the Jupyter notebook for the detailed data processing workflow and interactive chart exploration.
+    </div>
+
+</div>
+
+<!-- Lightbox 模态框 HTML -->
+<div id="lightboxModal" class="modal" onclick="closeLightbox()">
+    <span class="close-btn">&times;</span>
+    <img class="modal-content" id="modalImg">
+</div>
+
+<!-- Lightbox 交互脚本 -->
+<script>
+    function openLightbox(imgSrc) {
+        var modal = document.getElementById("lightboxModal");
+        var modalImg = document.getElementById("modalImg");
+        modal.style.display = "block";
+        modalImg.src = imgSrc;
+    }
+
+    function closeLightbox() {
+        var modal = document.getElementById("lightboxModal");
+        modal.style.display = "none";
+    }
+    
+    // 按 ESC 键也可以关闭放大图
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+</script>
+
+</body>
+</html>
