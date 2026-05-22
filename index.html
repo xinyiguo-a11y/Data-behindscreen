@@ -199,7 +199,7 @@ It can be seen that most of the time I do pay, and I watch a large number of Ame
             <h2>The Economic Funnel (Sankey Diagram)</h2>
             <p><strong>Data Calculation & Processing Methodology:</strong></p>
             <ul>
-                <li><strong>Dimensional Aggregation:</strong> Extracted key categorical dimensions such as <code>Platform</code>, <code>Type</code>, and <code>Genre</code> from the raw <code>watching_data.csv</code> dataset.</li>
+                <li><strong>Dimensional Aggregation:</strong> Extracted key categorical dimensions:<code>Platform</code>, <code>Country_Release</code>, <code>Type</code>, and <code>Genre</code> from the raw <code>watching_data.csv</code> dataset.</li>
                 <li><strong>Flow Calculation:</strong> Aggregated the rows using a multi-level grouping mechanism (<code>groupby</code>) to compute the exact counts of records flowing between adjacent nodes (e.g., tracking the precise number of entries shifting from "NETFLIX" to "Movie" vs. "TV Series").</li>
                 <li><strong>Weight Mapping:</strong> The width of the connecting links directly scales with the frequency of views (or total <code>Duration_Minutes</code>), providing an immediate, high-level visual breakdown of which platforms and contents dominated my screen time.</li>
             </ul>
@@ -222,8 +222,8 @@ This visual evidence proves the "Taste Paradox": Not only do I actively consume 
             <p><strong>Data Calculation & Processing Methodology:</strong></p>
             <ul>
                 <li><strong>Axis Configuration:</strong> Positioned <code>Public_Rating</code> on the X-axis and personal <code>My_Rating</code> on the Y-axis to formally contrast external consensus with individual taste.</li>
-                <li><strong>Quadrant Division:</strong> Established a crosshair baseline utilizing the mean or median values of both score distributions, mathematically segmenting the chart into four distinct quadrants (e.g., "Guilty Pleasures", "Critically Acclaimed Masterpieces", "Overrated Hits", and "Shared Dislikes").</li>
-                <li><strong>Bubble Scaling:</strong> Each bubble represents a single title. The size of the bubble is dynamically mapped to <code>Duration_Minutes</code> or <code>Watch_Index</code>, making longer series or higher-weight views visually prominent.</li>
+                <li><strong>Quadrant Division:</strong> Established a crosshair baseline utilizing the mean values of both score distributions, mathematically segmenting the chart into four distinct quadrants ("Guilty Pleasures", "Masterpieces", "Disappointments", and "Hidden Gems").</li>
+                <li><strong>Bubble Settings:</strong> Each bubble represents a single entity. The size of the bubble is dynamically mapped to <code>Watch_Index</code>, making higher-weight views visually prominent.Colors are used to distinguish whether payment was made or not.</li>
             </ul>
         </div>
     </div>
@@ -245,8 +245,9 @@ This visual evidence proves the "Taste Paradox": Not only do I actively consume 
             <p><strong>Data Calculation & Processing Methodology:</strong></p>
             <ul>
                 <li><strong>Time-Series Aggregation:</strong> Chronologically sorted and grouped the data by <code>Watch_Year_Quarter</code> to summarize the count and total duration per quarter. This highlights how my viewing frequency adjusted rhythmically with academic workloads across semesters.</li>
-                <li><strong>Categorical Distribution:</strong> Analyzed the composition of categorical attributes like <code>Country_Release</code> or <code>Genre</code> through frequency counts and normalized percentage distributions to find demographic preferences.</li>
-                <li><strong>Data Exploding (Data Cleaning):</strong> To accurately handle multi-labeled entries (e.g., <code>Drama|Thriller</code>), rows were split using <code>.str.split('|')</code> and expanded via <code>.explode()</code>. This crucial data-clearing step ensures that each sub-genre is accurately accounted for without underrepresenting composite genres.</li>
+                <li><strong>Categorical Distribution:</strong> Analyze the composition of classification attributes such as <code>"Type" </code>and <code>"Genre"</code> through frequency counting and standardized percentage distribution, and there are two axis-like charts that can better visually identify the inclusion relationship between types and genres.</li>
+                <li><strong>Left Y-Axis (Bar Chart) - Total Duration Minutes:</strong> To generate these bars, for each distinct quarter, the values in the <code>Duration_Minutes</code> column were aggregated using a Sum function. This calculates the absolute total time spent watching content during that specific academic term.</li>
+                <li><strong>Right Y-Axis (Line Chart) - Average Rewatch Rate:</strong> The data was similarly grouped by Watch_Year_Quarter, however, instead of calculating the sum, the values in the <code>Watch_Index</code> (Rewatch Rate) column were aggregated using a Mean (Average) function. This calculates the average repetition frequency of the works watched in that quarter.</li>
             </ul>
         </div>
     </div>
